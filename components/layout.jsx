@@ -1,5 +1,5 @@
 // components/Layout.js
-
+import { Analytics } from '@vercel/analytics/react';
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
@@ -10,7 +10,12 @@ const Layout = ({ children }) => (
       <title>WooBridge</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-    <main>{children}</main>
+    <main>
+      {children}
+
+      {/* Note: varcel punya */}
+      <Analytics />
+    </main>
   </div>
 );
 
