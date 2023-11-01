@@ -12,7 +12,7 @@ export default function Home() {
           Welcome to <a href="#">WooBridge!</a>
         </h1>
         <div className={styles.grid}>
-          <a href="#" className="btn btn-outline-primary">
+          <a href="/login" className="btn btn-outline-primary">
            Let's Connect &rarr;
           </a>
 

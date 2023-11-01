@@ -33,7 +33,7 @@ export default function Register() {
           <div className="col-md-4">
             <div className="mb-5 text-center">
               <p className="h1 font-w700">
-                Register <a href="#">WooBridge!</a>
+                Register WooBridge!
               </p>
             </div>
             <div className="card p-1">
@@ -76,10 +76,10 @@ export default function Register() {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                   </div>
-                  <div className="d-flex">
+                  <div className="d-flex flex-row-reverse">
                     <Button
                       type="submit"
-                      className="btn btn-primary flex-row-reverse"
+                      className="btn btn-primary "
                     >
                       Register
                     </Button>
