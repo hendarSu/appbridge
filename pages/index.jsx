@@ -7,10 +7,6 @@ export default function Home() {
   return (
     <Layout>
       <div className={styles.container}>
-      <Head>
-        <title>WooBridge</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <main>
         <h1 className={styles.title}>
           Welcome to <a href="#">WooBridge!</a>
@@ -78,7 +74,6 @@ export default function Home() {
       `}</style>
 
       <style jsx global>{`
-        html,
         body {
           padding: 0;
           margin: 0;
