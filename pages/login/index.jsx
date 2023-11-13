@@ -14,13 +14,9 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (password === confirmPassword) {
-    //   // Lakukan logika pendaftaran di sini (misalnya, kirim data ke server)
-    // } else {
       setShowToast(true);
       setToastMessage("Passwords do not match.");
       setToastColor("bg-warning");
-    // }
   };
 
   return (

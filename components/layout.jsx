@@ -1,5 +1,4 @@
 // components/Layout.js
-import { Analytics } from '@vercel/analytics/react';
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
@@ -12,9 +11,6 @@ const Layout = ({ children }) => (
     </Head>
     <main>
       {children}
-
-      {/* Note: varcel punya */}
-      <Analytics />
     </main>
   </div>
 );
