@@ -12,7 +12,11 @@ describe('Home', () => {
     const heading = screen.getByRole('heading', {
       name: 'Welcome to WooBridge!',
     })
+    const btnName = screen.getByText("Let's Connect →")
+    const footer = screen.getByText("Powered by")
 
     expect(heading).toBeInTheDocument()
+    expect(btnName).toBeInTheDocument()
+    expect(footer).toBeInTheDocument();
   })
 })
