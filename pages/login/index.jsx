@@ -1,8 +1,11 @@
 import Layout from "../../components/layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ToastNotification from "../../components/toast";
 import { Button } from "react-bootstrap";
+import { postLogin } from "../../server/api";
+import { getCookie, setCookie } from "../../utils/cookies";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,24 +15,50 @@ export default function Login() {
   const [toastMessage, setToastMessage] = useState("");
   const [toastColor, setToastColor] = useState("");
 
-  const handleSubmit = (e) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-      // setShowToast(true);
-      // setToastMessage("Passwords do not match.");
-      // setToastColor("bg-warning");
-      alert("Login Berhasi!");
+
+    const response = await postLogin({
+      email,
+      password,
+    });
+
+    if (response && response.status === "success") {
+      setCookie("userData", JSON.stringify(response.data), {
+        expires: 1,
+      });
+
+      window.location.href = "/";
+    } else {
+      if (response) {
+        setShowToast(true);
+        setToastMessage(response.data?.message);
+        setToastColor("bg-warning");
+      }
+    }
   };
+
+  useEffect(() => {
+    const userData = getCookie("userData")
+    if(userData) {
+        router.push("/dashboard");
+    }
+  },[])
+
 
   return (
     <Layout>
       <div className="container">
-        <div className="row justify-content-center align-items-center" style={{ height: '100vh' }}>
+        <div
+          className="row justify-content-center align-items-center"
+          style={{ height: "100vh" }}
+        >
           <div className="col-md-4"></div>
           <div className="col-md-4">
             <div className="mb-5 text-center">
-              <p className="h1 font-w700">
-                Login WooBridge!
-              </p>
+              <p className="h1 font-w700">Login WooBridge!</p>
             </div>
             <div className="card p-1">
               <div className="card-body">
@@ -48,7 +77,10 @@ export default function Login() {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="exampleInputPassword1" className="form-label">
+                    <label
+                      htmlFor="exampleInputPassword1"
+                      className="form-label"
+                    >
                       Password
                     </label>
                     <input
@@ -60,10 +92,7 @@ export default function Login() {
                     />
                   </div>
                   <div className="d-flex flex-row-reverse">
-                    <Button
-                      type="submit"
-                      className="btn btn-primary"
-                    >
+                    <Button type="submit" className="btn btn-primary">
                       Login
                     </Button>
                   </div>

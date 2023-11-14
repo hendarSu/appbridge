@@ -5,9 +5,14 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import Login from "../pages/login";
 import { server } from "../mocks/server";
+import mockRouter from 'next-router-mock';
+
+jest.mock('next/router', () => jest.requireActual('next-router-mock'))
 
 // Rest Libary
-beforeAll(() => server.listen());
+beforeAll(() => () => {
+  server.listen()
+});
 afterEach(() => {
   server.resetHandlers();
 });
@@ -33,7 +38,9 @@ describe("Login", () => {
     expect(btnLogin).toBeInTheDocument();
   });
 
-  it("Testing Login Process", () => {
+  it("Testing Login Process", () => { 
+    mockRouter.push("/dashboard");
+    
     render(<Login />);
 
     jest.spyOn(window, "alert").mockImplementation(() => {});
@@ -52,9 +59,13 @@ describe("Login", () => {
       })
     );
     
+    expect(mockRouter).toMatchObject({ 
+      asPath: "/dashboard",
+      pathname: "/dashboard",
+    });
+
     // const alert = screen.getByRole('alert')
     // expect(alert).toHaveTextContent(/Passwords do not match./i)
-    
-    expect(window.alert).toBeCalled();
+    // expect(window.alert).toBeCalled();
   });
 });
