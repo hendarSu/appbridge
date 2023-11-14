@@ -14,9 +14,10 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      setShowToast(true);
-      setToastMessage("Passwords do not match.");
-      setToastColor("bg-warning");
+      // setShowToast(true);
+      // setToastMessage("Passwords do not match.");
+      // setToastColor("bg-warning");
+      alert("Login Berhasi!");
   };
 
   return (

@@ -10,7 +10,6 @@ import { server } from "../mocks/server";
 beforeAll(() => server.listen());
 afterEach(() => {
   server.resetHandlers();
-  window.localStorage.removeItem("token");
 });
 afterAll(() => server.close());
 
@@ -37,6 +36,8 @@ describe("Login", () => {
   it("Testing Login Process", () => {
     render(<Login />);
 
+    jest.spyOn(window, "alert").mockImplementation(() => {});
+
     // fill out the form
     fireEvent.change(screen.getByLabelText(/email/i), {
       target: { value: "hendar@clodeo.com" },
@@ -48,11 +49,12 @@ describe("Login", () => {
     fireEvent.click(
       screen.getByRole("button", {
         name: "Login",
-      }
-    ))
-
-    const alert = screen.getByRole('alert')
-    expect(alert).toHaveTextContent(/Passwords do not match./i)
-
+      })
+    );
+    
+    // const alert = screen.getByRole('alert')
+    // expect(alert).toHaveTextContent(/Passwords do not match./i)
+    
+    expect(window.alert).toBeCalled();
   });
 });
