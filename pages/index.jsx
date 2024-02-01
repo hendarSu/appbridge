@@ -8,7 +8,7 @@ export default function Home() {
     <Layout>
       <div className={styles.container}>
         <main>
-          <h1 className={styles.title}>Welcome to WooBridge!</h1>
+          <h1 className={styles.title}>Welcome to AppBridge!</h1>
           <div className={styles.grid}>
             <a href="/login" className="btn btn-outline-primary">
               Let's Connect &rarr;
